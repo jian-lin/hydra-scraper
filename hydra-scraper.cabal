@@ -1,0 +1,90 @@
+cabal-version:   3.0
+name:            hydra-scraper
+version:         0.1.0.0
+synopsis:        A scraper for nix hydra
+
+-- description:
+homepage:        https://TODO.com
+license:         AGPL-3.0-or-later
+license-file:    LICENSE
+author:          Lin Jian
+maintainer:      me@linj.tech
+
+-- copyright:
+category:        Web
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+-- extra-source-files:
+
+common warnings
+  ghc-options: -Wall
+
+common deps
+  build-depends:
+    , base                  ^>=4.18.2.1
+    , co-log                ^>=0.6.1.0
+    , optparse-applicative  ^>=0.18.1.0
+    , relude                ^>=1.2.2.0
+    , uncaught-exception    ^>=0.1.0
+
+  default-extensions:
+    DerivingStrategies
+    NoImplicitPrelude
+    OverloadedStrings
+
+library
+  import:
+    warnings,
+    deps
+
+  exposed-modules:
+    HydraScraper
+    HydraScraper.App
+    HydraScraper.Exceptions
+    HydraScraper.Types
+    HydraScraper.Types.BuildQueueSize
+    HydraScraper.Types.Main
+    HydraScraper.Utils
+
+  -- other-modules:
+  -- other-extensions:
+  build-depends:
+    , aeson               ^>=2.1.2.1
+    , safe-exceptions     ^>=0.1.7.4
+    , scalpel             ^>=0.6.2.2
+    , string-interpolate  ^>=0.3.4.0
+    , table-layout        ^>=1.0.0.1
+    , tagsoup             ^>=0.14.8
+
+  hs-source-dirs:   src
+  default-language: GHC2021
+
+executable hydra-scraper
+  import:
+    warnings
+    , deps
+
+  main-is:          Main.hs
+  other-modules:
+    Main.Cli
+    Main.Types
+
+  -- other-extensions:
+  build-depends:    hydra-scraper
+  hs-source-dirs:   app
+  default-language: GHC2021
+
+test-suite hydra-scraper-test
+  import:
+    warnings
+    , deps
+
+  default-language: GHC2021
+
+  -- other-modules:
+  -- other-extensions:
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Main.hs
+  build-depends:    hydra-scraper
