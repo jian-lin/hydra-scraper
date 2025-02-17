@@ -47,7 +47,7 @@ instance MonadWriteTerminal (App env msg) where
             ( Table.rowG
                 . ( \job ->
                       [ display $ jobUrl job,
-                        display $ jobName job,
+                        -- display $ jobName job,
                         display $ jobSystem job,
                         display $ jobFailureMode job,
                         display $ jobPackageName job,
