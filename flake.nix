@@ -43,9 +43,12 @@
           );
         });
       };
-      packages.${system}.default = haskellPackages.generateOptparseApplicativeCompletions [
-        "hydra-scraper"
-      ] (pkgs.haskell.lib.compose.enableSeparateBinOutput haskellPackages.${projectName});
+      packages.${system} = {
+        default = pkgs.lib.getBin self.packages.${system}.all;
+        all = haskellPackages.generateOptparseApplicativeCompletions [
+          "hydra-scraper"
+        ] (pkgs.haskell.lib.compose.enableSeparateBinOutput haskellPackages.${projectName});
+      };
       devShells.${system}.default = haskellPackages.shellFor {
         packages = hpkgs: [ hpkgs.${projectName} ];
         nativeBuildInputs =
