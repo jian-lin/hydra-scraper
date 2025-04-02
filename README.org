@@ -1,0 +1,5 @@
+To check the latest build failures of [[https://github.com/nix-community/emacs-overlay][emacs-overlay]], run this
+
+#+begin_src bash
+  nix run github:jian-lin/hydra-scraper -- --human-readable predefined --target EmacsOverlay
+#+end_src
