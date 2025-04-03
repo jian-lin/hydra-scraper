@@ -1,4 +1,7 @@
 {
+  # use haskell-updates branch for HLS-2.10.0.0
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/haskell-updates";
+
   outputs =
     { self, nixpkgs }:
     let
@@ -21,6 +24,7 @@
               hlib = final.haskell.lib.compose;
             in
             hfinal: hprev: {
+              http-client-tls = hlib.doJailbreak hprev.http-client-tls;
               ${projectName} =
                 let
                   # filter out haskell-unrelated files to avoid unnecessary rebuilds
